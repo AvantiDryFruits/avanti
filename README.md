@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Avanti Dry Fruits — V1 Demo
 
-## Getting Started
+E-commerce demo site for Avanti Dry Fruits (Mulund West, Mumbai). Mobile-first, WhatsApp-driven
+ordering, no payment gateway. Built with Next.js 14 (App Router), TypeScript, Tailwind CSS.
 
-First, run the development server:
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`. Admin panel: `http://localhost:3000/admin` (password in `.env.local`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What this v1 is
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Public site**: Home, About Us, Shop, Gifting, FAQs, Cart — reads from static seed data
+  (`src/data/products.seed.ts`, `src/data/hampers.seed.ts`: 50 products, 7 hampers).
+- **Ordering**: cart-based, checkout builds one itemised message and opens WhatsApp
+  (`https://wa.me/<number>`). No payment gateway.
+- **Admin panel**: password-gated (`ADMIN_PASSWORD` env var + cookie, not real auth). Full CRUD
+  for products and hampers, backed by `localStorage` (no real database yet).
 
-## Learn More
+## Key v1 simplification: admin edits don't touch the public site
 
-To learn more about Next.js, take a look at the following resources:
+Public pages (`/`, `/shop`, `/gifting`) import the seed arrays **directly**. Admin pages read and
+write through a `localStorage`-backed repository (`src/lib/data/products.ts`, `hampers.ts`). This
+means anything you add/edit/delete in `/admin` is sandboxed to your browser and **will not appear**
+on the live storefront — intentional, so the demo's admin can be explored freely without risk.
+This is the first thing that changes once a real database (Supabase) is wired up.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Known v1 limitations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- No real database — `localStorage` stands in for it. Clearing browser storage resets admin data
+  back to the seed.
+- No real authentication on `/admin` — single shared password, not per-user accounts.
+- Product/hamper images: paste a URL or upload (stored as base64 in `localStorage`, ~5–10MB
+  practical ceiling). No image hosting yet.
+- No order history — WhatsApp chat is the only record of an order today.
+- One global set of weight options (100g/250g/500g/1kg) for every product.
 
-## Deploy on Vercel
+## Recommended next steps for a production version
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Move products/hampers to Supabase (table shapes already match the `Product`/`GiftHamper`
+  TypeScript interfaces — see `src/lib/data/types.ts`).
+- Replace the shared-password gate with Supabase Auth + RLS.
+- Move images to Supabase Storage.
+- Log submitted orders to a database table for the owner's records.
+- Real product photography, Instagram handle, and a proper logo.
+- SEO structured data + sitemap, privacy-friendly analytics.
+- Optional: Razorpay/UPI checkout alongside WhatsApp.

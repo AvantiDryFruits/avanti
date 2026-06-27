@@ -3,21 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces — warm cream, never pure white */
+  --bg: 97% 0.01 95;
+  --surface: 99% 0.004 95;
+  --surface-2: 93% 0.014 90;
+  --border: 88% 0.02 90;
+
+  /* Brand green — from the card's bottle-green background */
+  --green: 28% 0.045 155;
+  --green-dark: 20% 0.04 155;
+  --green-light: 40% 0.05 155;
+
+  /* Brand orange — from the sunburst badge */
+  --orange: 65% 0.18 45;
+  --orange-dark: 56% 0.18 42;
+  --orange-light: 80% 0.12 55;
+
+  /* Ink */
+  --ink: 22% 0.02 155;
+  --ink-soft: 42% 0.02 100;
+  --muted: 60% 0.014 100;
+  --on-dark: 97% 0.01 95;
+
+  /* Functional */
+  --success: 55% 0.1 145;
+  --warn: 65% 0.15 45;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: oklch(var(--border));
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: oklch(var(--ink));
+  background: oklch(var(--bg));
 }
 
 @layer utilities {
