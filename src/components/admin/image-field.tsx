@@ -1,24 +1,49 @@
 "use client";
 
-import { useRef, type ChangeEvent } from "react";
+import { useState, useRef, type ChangeEvent } from "react";
 import { Upload, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 export function ImageField({
   value,
   onChange,
+  bucket = "product-images",
 }: {
   value: string | null;
   onChange: (value: string | null) => void;
+  bucket?: "product-images" | "hamper-images";
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
 
-  function handleFile(e: ChangeEvent<HTMLInputElement>) {
+  async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => onChange(reader.result as string);
-    reader.readAsDataURL(file);
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (supabaseUrl && supabaseKey) {
+      setUploading(true);
+      try {
+        const { createBrowserClient } = await import("@supabase/ssr");
+        const supabase = createBrowserClient(supabaseUrl, supabaseKey);
+        const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "-")}`;
+        const { data, error } = await supabase.storage
+          .from(bucket)
+          .upload(path, file, { upsert: true });
+        if (!error && data) {
+          const { data: urlData } = supabase.storage.from(bucket).getPublicUrl(data.path);
+          onChange(urlData.publicUrl);
+        }
+      } finally {
+        setUploading(false);
+      }
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => onChange(reader.result as string);
+      reader.readAsDataURL(file);
+    }
   }
 
   const isDataUrl = value?.startsWith("data:") ?? false;
@@ -34,10 +59,11 @@ export function ImageField({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="flex h-11 shrink-0 items-center gap-1 rounded-lg border border-border px-3 text-sm text-ink-soft hover:bg-sand"
+          disabled={uploading}
+          className="flex h-11 shrink-0 items-center gap-1 rounded-lg border border-border px-3 text-sm text-ink-soft hover:bg-sand disabled:opacity-50"
         >
           <Upload size={16} />
-          Upload
+          {uploading ? "Uploading…" : "Upload"}
         </button>
         <input
           ref={fileInputRef}

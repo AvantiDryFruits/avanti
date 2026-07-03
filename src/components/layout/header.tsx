@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
 import { MobileMenu } from "./mobile-menu";
@@ -7,8 +8,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-cream">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 md:px-6">
-        <Link href="/" className="font-display text-xl text-green-dark md:text-2xl">
-          {SITE_NAME}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.png"
+            alt={SITE_NAME}
+            width={55}
+            height={44}
+            className="rounded-md"
+            priority
+          />
+          <span className="font-display text-xl text-green-dark md:text-2xl">{SITE_NAME}</span>
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

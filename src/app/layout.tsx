@@ -18,6 +18,22 @@ export const metadata: Metadata = {
   },
   description:
     "Premium dry fruits, masala, farsan, namkeen, sweets and gift hampers from Avanti Dry Fruits, Mulund West, Mumbai. Order on WhatsApp.",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Avanti Dry Fruits — The Trust of Purity & Taste",
+    description:
+      "Premium dry fruits, masala, farsan, namkeen, sweets and gift hampers from Avanti Dry Fruits, Mulund West, Mumbai. Order on WhatsApp.",
+    images: [{ url: "/og-image.png", width: 715, height: 572, alt: "Avanti Dry Fruits" }],
+    type: "website",
+    siteName: "Avanti Dry Fruits",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

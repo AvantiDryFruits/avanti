@@ -141,7 +141,7 @@ export function ProductForm({ product }: { product?: Product }) {
 
       <div>
         <label className="mb-1 block text-sm font-medium text-ink">Image</label>
-        <ImageField value={imageUrl} onChange={setImageUrl} />
+        <ImageField value={imageUrl} onChange={setImageUrl} bucket="product-images" />
       </div>
 
       <div className="flex gap-6">

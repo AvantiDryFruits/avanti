@@ -16,19 +16,28 @@ export default function AboutPage() {
 
       <div className="mt-8 space-y-6 text-ink-soft">
         <p>
-          Avanti Dry Fruits is a neighbourhood store in Mulund West, Mumbai, bringing together
-          premium dry fruits, nuts, masala, traditional sweets, farsan and namkeen under one roof.
-          Every product is hand-checked for quality before it reaches our shelves.
+          Welcome to Avanti Dry Fruits, your home for premium dry fruits, Namkeen (farsan), and
+          authentic Indian sweets, along with our specially crafted masalas known for their rich,
+          excellent taste.
         </p>
         <p>
-          Whether you&apos;re stocking up for the week, prepping for a festival, or putting
-          together a gift hamper for someone special, we keep a wide range on hand and weigh out
-          exactly what you need — by the gram, not just by the packet.
+          We&apos;re a family business, proudly serving customers since 1978. What started as a
+          commitment to quality has grown into a legacy, one we&apos;ve carried through generations.
         </p>
         <p>
-          We keep ordering simple: browse the shop, build your cart, and send it to us directly on
-          WhatsApp. No accounts, no apps, no payment gateway friction — just a quick chat to
-          confirm your order.
+          Our promise has always been simple: quality and purity, first and always. Every product
+          that leaves our store carries the same standard we set decades ago.
+        </p>
+        <p>
+          Over the years, we&apos;ve been fortunate to earn the trust of customers across Mumbai,
+          across India, and even abroad.
+        </p>
+        <p className="font-medium text-ink">
+          At the heart of it, our motto has never changed: customer satisfaction, always.
+          We&apos;ve stood by it since 1978, and we promise to keep standing by it.
+        </p>
+        <p className="font-display text-lg font-semibold text-green-dark">
+          The Trust Of Purity And Taste
         </p>
       </div>
 
