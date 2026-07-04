@@ -22,7 +22,7 @@ export interface Product {
   description: string | null;
   category: ProductCategory;
   price_per_gram: number;
-  image_url: string | null;
+  image_urls: string[];
   is_available: boolean;
   is_featured: boolean;
   created_at: string;
@@ -36,7 +36,7 @@ export interface GiftHamper {
   description: string | null;
   price: number;
   contents: string[];
-  image_url: string | null;
+  image_urls: string[];
   is_available: boolean;
   is_featured: boolean;
   created_at: string;

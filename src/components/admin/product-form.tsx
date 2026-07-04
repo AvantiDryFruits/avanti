@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { ImageField } from "./image-field";
+import { ImagesField } from "./images-field";
 import { createProduct, updateProduct } from "@/lib/actions/products";
 import { PRODUCT_CATEGORIES } from "@/lib/data/types";
 import { slugify } from "@/lib/utils";
@@ -31,7 +31,7 @@ type ProductFormValues = z.infer<typeof productSchema>;
 
 export function ProductForm({ product }: { product?: Product }) {
   const router = useRouter();
-  const [imageUrl, setImageUrl] = useState<string | null>(product?.image_url ?? null);
+  const [imageUrls, setImageUrls] = useState<string[]>(product?.image_urls ?? []);
   const [submitError, setSubmitError] = useState("");
 
   const {
@@ -71,7 +71,7 @@ export function ProductForm({ product }: { product?: Product }) {
           description: values.description || null,
           category: values.category,
           price_per_gram: values.price_per_gram,
-          image_url: imageUrl,
+          image_urls: imageUrls,
           is_available: values.is_available,
           is_featured: values.is_featured,
         });
@@ -82,7 +82,7 @@ export function ProductForm({ product }: { product?: Product }) {
           description: values.description || null,
           category: values.category,
           price_per_gram: values.price_per_gram,
-          image_url: imageUrl,
+          image_urls: imageUrls,
           is_available: values.is_available,
           is_featured: values.is_featured,
         });
@@ -140,8 +140,8 @@ export function ProductForm({ product }: { product?: Product }) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-ink">Image</label>
-        <ImageField value={imageUrl} onChange={setImageUrl} bucket="product-images" />
+        <label className="mb-1 block text-sm font-medium text-ink">Images</label>
+        <ImagesField values={imageUrls} onChange={setImageUrls} bucket="product-images" />
       </div>
 
       <div className="flex gap-6">

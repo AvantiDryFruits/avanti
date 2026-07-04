@@ -75,7 +75,7 @@ export const HAMPERS_SEED: GiftHamper[] = ROWS.map((row, i) => {
     description: row.description,
     price: row.price,
     contents: row.contents,
-    image_url: null,
+    image_urls: [],
     is_available: row.available ?? true,
     is_featured: row.featured ?? false,
     created_at,

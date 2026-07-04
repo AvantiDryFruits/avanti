@@ -65,7 +65,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         name: product.name,
         slug: product.slug,
         category: product.category,
-        image_url: product.image_url,
+        image_url: product.image_urls[0] ?? null,
         grams,
         pricePerGram: product.price_per_gram,
         quantity,
@@ -90,7 +90,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         hamperId: hamper.id,
         name: hamper.name,
         slug: hamper.slug,
-        image_url: hamper.image_url,
+        image_url: hamper.image_urls[0] ?? null,
         price: hamper.price,
         quantity,
       };

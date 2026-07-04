@@ -89,7 +89,7 @@ export const PRODUCTS_SEED: Product[] = ROWS.map((row, i) => {
     description: row.description,
     category: row.category,
     price_per_gram: row.pricePerGram,
-    image_url: null,
+    image_urls: [],
     is_available: true,
     is_featured: row.featured ?? false,
     created_at,

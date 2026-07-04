@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { ImageField } from "./image-field";
+import { ImagesField } from "./images-field";
 import { ContentsListInput } from "./contents-list-input";
 import { createHamper, updateHamper } from "@/lib/actions/hampers";
 import { slugify } from "@/lib/utils";
@@ -27,7 +27,7 @@ type HamperFormValues = z.infer<typeof hamperSchema>;
 
 export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
   const router = useRouter();
-  const [imageUrl, setImageUrl] = useState<string | null>(hamper?.image_url ?? null);
+  const [imageUrls, setImageUrls] = useState<string[]>(hamper?.image_urls ?? []);
   const [contents, setContents] = useState<string[]>(hamper?.contents ?? [""]);
   const [submitError, setSubmitError] = useState("");
 
@@ -68,7 +68,7 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
           description: values.description || null,
           price: values.price,
           contents: cleanContents,
-          image_url: imageUrl,
+          image_urls: imageUrls,
           is_available: values.is_available,
           is_featured: values.is_featured,
         });
@@ -79,7 +79,7 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
           description: values.description || null,
           price: values.price,
           contents: cleanContents,
-          image_url: imageUrl,
+          image_urls: imageUrls,
           is_available: values.is_available,
           is_featured: values.is_featured,
         });
@@ -123,8 +123,8 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-ink">Image</label>
-        <ImageField value={imageUrl} onChange={setImageUrl} bucket="hamper-images" />
+        <label className="mb-1 block text-sm font-medium text-ink">Images</label>
+        <ImagesField values={imageUrls} onChange={setImageUrls} bucket="hamper-images" />
       </div>
 
       <div className="flex gap-6">
