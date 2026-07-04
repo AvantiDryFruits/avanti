@@ -4,7 +4,7 @@ import { slugify } from "@/lib/utils";
 import type { GiftHamper } from "@/lib/data/types";
 
 export async function getHampers(): Promise<GiftHamper[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.from("gift_hampers").select("*").order("name");
   if (error) throw error;
   return data ?? [];
@@ -18,7 +18,7 @@ export async function getHamperById(id: string): Promise<GiftHamper | null> {
 }
 
 export async function getHamperBySlug(slug: string): Promise<GiftHamper | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("gift_hampers")
     .select("*")
@@ -29,7 +29,7 @@ export async function getHamperBySlug(slug: string): Promise<GiftHamper | null> 
 }
 
 export async function getFeaturedHampers(): Promise<GiftHamper[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("gift_hampers")
     .select("*")

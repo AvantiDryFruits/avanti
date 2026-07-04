@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ProductsTable } from "@/components/admin/products-table";
 import { buttonClasses } from "@/components/ui/button";
+import { getProducts } from "@/lib/supabase/products";
 
-export default function AdminProductsPage() {
+export default async function AdminProductsPage() {
+  const products = await getProducts();
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -11,14 +14,14 @@ export default function AdminProductsPage() {
           <h1 className="font-display text-2xl text-ink">Products</h1>
           <p className="mt-1 text-sm text-ink-soft">Manage your shop catalog.</p>
         </div>
-        <Link href="/admin/products/new" className={buttonClasses({ variant: "primary" })}>
+        <Link href="/dashboard/products/new" className={buttonClasses({ variant: "primary" })}>
           <Plus size={16} />
           New Product
         </Link>
       </div>
 
       <div className="mt-6">
-        <ProductsTable />
+        <ProductsTable products={products} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { slugify } from "@/lib/utils";
 import type { Product, ProductCategory } from "@/lib/data/types";
 
 export async function getProducts(): Promise<Product[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.from("products").select("*").order("name");
   if (error) throw error;
   return data ?? [];
@@ -18,14 +18,14 @@ export async function getProductById(id: string): Promise<Product | null> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.from("products").select("*").eq("slug", slug).single();
   if (error) return null;
   return data;
 }
 
 export async function getProductsByCategory(category: ProductCategory): Promise<Product[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("products")
     .select("*")
@@ -36,7 +36,7 @@ export async function getProductsByCategory(category: ProductCategory): Promise<
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("products")
     .select("*")

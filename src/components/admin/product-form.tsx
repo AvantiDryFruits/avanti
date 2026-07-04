@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { ImageField } from "./image-field";
-import { createProduct, updateProduct } from "@/lib/data/products";
+import { createProduct, updateProduct } from "@/lib/actions/products";
 import { PRODUCT_CATEGORIES } from "@/lib/data/types";
 import { slugify } from "@/lib/utils";
 import type { Product } from "@/lib/data/types";
@@ -61,11 +61,11 @@ export function ProductForm({ product }: { product?: Product }) {
         },
   });
 
-  function onSubmit(values: ProductFormValues) {
+  async function onSubmit(values: ProductFormValues) {
     setSubmitError("");
     try {
       if (product) {
-        updateProduct(product.id, {
+        await updateProduct(product.id, {
           name: values.name,
           slug: values.slug?.trim() ? slugify(values.slug) : product.slug,
           description: values.description || null,
@@ -76,7 +76,7 @@ export function ProductForm({ product }: { product?: Product }) {
           is_featured: values.is_featured,
         });
       } else {
-        createProduct({
+        await createProduct({
           name: values.name,
           slug: values.slug,
           description: values.description || null,
@@ -87,7 +87,7 @@ export function ProductForm({ product }: { product?: Product }) {
           is_featured: values.is_featured,
         });
       }
-      router.push("/admin/products");
+      router.push("/dashboard/products");
       router.refresh();
     } catch {
       setSubmitError("Something went wrong. Please try again.");

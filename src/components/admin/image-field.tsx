@@ -3,6 +3,7 @@
 import { useState, useRef, type ChangeEvent } from "react";
 import { Upload, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { uploadImage } from "@/lib/actions/storage";
 
 export function ImageField({
   value,
@@ -15,34 +16,25 @@ export function ImageField({
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (supabaseUrl && supabaseKey) {
-      setUploading(true);
-      try {
-        const { createBrowserClient } = await import("@supabase/ssr");
-        const supabase = createBrowserClient(supabaseUrl, supabaseKey);
-        const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "-")}`;
-        const { data, error } = await supabase.storage
-          .from(bucket)
-          .upload(path, file, { upsert: true });
-        if (!error && data) {
-          const { data: urlData } = supabase.storage.from(bucket).getPublicUrl(data.path);
-          onChange(urlData.publicUrl);
-        }
-      } finally {
-        setUploading(false);
+    setUploading(true);
+    setError(null);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const result = await uploadImage(fd, bucket);
+      if ("error" in result) {
+        setError(result.error);
+      } else {
+        onChange(result.url);
       }
-    } else {
-      const reader = new FileReader();
-      reader.onload = () => onChange(reader.result as string);
-      reader.readAsDataURL(file);
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -73,6 +65,8 @@ export function ImageField({
           onChange={handleFile}
         />
       </div>
+
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
 
       {value && (
         <div className="mt-3 flex items-center gap-3">

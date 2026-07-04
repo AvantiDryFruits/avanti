@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ImageField } from "./image-field";
 import { ContentsListInput } from "./contents-list-input";
-import { createHamper, updateHamper } from "@/lib/data/hampers";
+import { createHamper, updateHamper } from "@/lib/actions/hampers";
 import { slugify } from "@/lib/utils";
 import type { GiftHamper } from "@/lib/data/types";
 
@@ -56,13 +56,13 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
         },
   });
 
-  function onSubmit(values: HamperFormValues) {
+  async function onSubmit(values: HamperFormValues) {
     setSubmitError("");
     const cleanContents = contents.map((c) => c.trim()).filter(Boolean);
 
     try {
       if (hamper) {
-        updateHamper(hamper.id, {
+        await updateHamper(hamper.id, {
           name: values.name,
           slug: values.slug?.trim() ? slugify(values.slug) : hamper.slug,
           description: values.description || null,
@@ -73,7 +73,7 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
           is_featured: values.is_featured,
         });
       } else {
-        createHamper({
+        await createHamper({
           name: values.name,
           slug: values.slug,
           description: values.description || null,
@@ -84,7 +84,7 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
           is_featured: values.is_featured,
         });
       }
-      router.push("/admin/hampers");
+      router.push("/dashboard/hampers");
       router.refresh();
     } catch {
       setSubmitError("Something went wrong. Please try again.");

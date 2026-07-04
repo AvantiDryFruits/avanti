@@ -2,13 +2,18 @@
 
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
+import { createBrowserClient } from "@supabase/ssr";
 
 export function LogoutButton() {
   const router = useRouter();
 
   async function handleLogout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    await supabase.auth.signOut();
+    router.push("/dashboard/login");
     router.refresh();
   }
 

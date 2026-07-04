@@ -1,28 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { getHampers, toggleHamperAvailability } from "@/lib/data/hampers";
+import { toggleHamperAvailability, deleteHamper } from "@/lib/actions/hampers";
 import { formatPrice } from "@/lib/utils";
 import type { GiftHamper } from "@/lib/data/types";
 import { AvailabilityToggle } from "./availability-toggle";
-import { DeleteHamperButton } from "./delete-hamper-button";
 
-export function HampersTable() {
-  const [hampers, setHampers] = useState<GiftHamper[] | null>(null);
+export function HampersTable({ hampers }: { hampers: GiftHamper[] }) {
+  const router = useRouter();
 
-  function refresh() {
-    setHampers(getHampers());
+  async function handleToggle(id: string) {
+    await toggleHamperAvailability(id);
+    router.refresh();
   }
 
-  useEffect(() => {
-    refresh();
-  }, []);
-
-  if (hampers === null) {
-    return <p className="text-sm text-ink-soft">Loading...</p>;
+  async function handleDelete(id: string) {
+    if (!confirm("Delete this hamper? This cannot be undone.")) return;
+    await deleteHamper(id);
+    router.refresh();
   }
 
   if (hampers.length === 0) {
@@ -65,22 +63,26 @@ export function HampersTable() {
               <td className="px-4 py-3">
                 <AvailabilityToggle
                   isAvailable={hamper.is_available}
-                  onToggle={() => {
-                    toggleHamperAvailability(hamper.id);
-                    refresh();
-                  }}
+                  onToggle={() => handleToggle(hamper.id)}
                 />
               </td>
               <td className="px-4 py-3 text-right">
                 <div className="flex items-center justify-end gap-2">
                   <Link
-                    href={`/admin/hampers/${hamper.id}`}
+                    href={`/dashboard/hampers/${hamper.id}`}
                     aria-label="Edit hamper"
                     className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-soft hover:bg-sand hover:text-ink"
                   >
                     <Pencil size={16} />
                   </Link>
-                  <DeleteHamperButton hamperId={hamper.id} onDeleted={refresh} />
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(hamper.id)}
+                    aria-label="Delete hamper"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-soft hover:bg-orange-light hover:text-orange-dark"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                  </button>
                 </div>
               </td>
             </tr>

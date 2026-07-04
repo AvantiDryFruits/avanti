@@ -4,9 +4,9 @@ import { SITE_NAME } from "@/lib/constants";
 import { LogoutButton } from "./logout-button";
 
 const LINKS = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/hampers", label: "Hampers", icon: Gift },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/products", label: "Products", icon: Package },
+  { href: "/dashboard/hampers", label: "Hampers", icon: Gift },
 ];
 
 export function Sidebar() {

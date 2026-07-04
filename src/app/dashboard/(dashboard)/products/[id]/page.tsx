@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ProductForm } from "@/components/admin/product-form";
-import { getProductById } from "@/lib/data/products";
+import { getProductById } from "@/lib/actions/products";
 import type { Product } from "@/lib/data/types";
 
 export default function EditProductPage() {
@@ -11,7 +11,7 @@ export default function EditProductPage() {
   const [product, setProduct] = useState<Product | null | undefined>(undefined);
 
   useEffect(() => {
-    setProduct(getProductById(params.id) ?? null);
+    getProductById(params.id).then((p) => setProduct(p ?? null));
   }, [params.id]);
 
   if (product === undefined) {

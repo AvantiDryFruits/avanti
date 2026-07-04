@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { HamperForm } from "@/components/admin/hamper-form";
-import { getHamperById } from "@/lib/data/hampers";
+import { getHamperById } from "@/lib/actions/hampers";
 import type { GiftHamper } from "@/lib/data/types";
 
 export default function EditHamperPage() {
@@ -11,7 +11,7 @@ export default function EditHamperPage() {
   const [hamper, setHamper] = useState<GiftHamper | null | undefined>(undefined);
 
   useEffect(() => {
-    setHamper(getHamperById(params.id) ?? null);
+    getHamperById(params.id).then((h) => setHamper(h ?? null));
   }, [params.id]);
 
   if (hamper === undefined) {

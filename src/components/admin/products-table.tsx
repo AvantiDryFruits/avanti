@@ -1,29 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { getProducts, toggleProductAvailability } from "@/lib/data/products";
+import { toggleProductAvailability, deleteProduct } from "@/lib/actions/products";
 import { PRODUCT_CATEGORIES } from "@/lib/data/types";
 import { formatPrice } from "@/lib/utils";
 import type { Product } from "@/lib/data/types";
 import { AvailabilityToggle } from "./availability-toggle";
-import { DeleteProductButton } from "./delete-product-button";
 
-export function ProductsTable() {
-  const [products, setProducts] = useState<Product[] | null>(null);
+export function ProductsTable({ products }: { products: Product[] }) {
+  const router = useRouter();
 
-  function refresh() {
-    setProducts(getProducts());
+  async function handleToggle(id: string) {
+    await toggleProductAvailability(id);
+    router.refresh();
   }
 
-  useEffect(() => {
-    refresh();
-  }, []);
-
-  if (products === null) {
-    return <p className="text-sm text-ink-soft">Loading...</p>;
+  async function handleDelete(id: string) {
+    if (!confirm("Delete this product? This cannot be undone.")) return;
+    await deleteProduct(id);
+    router.refresh();
   }
 
   if (products.length === 0) {
@@ -70,22 +68,26 @@ export function ProductsTable() {
                 <td className="px-4 py-3">
                   <AvailabilityToggle
                     isAvailable={product.is_available}
-                    onToggle={() => {
-                      toggleProductAvailability(product.id);
-                      refresh();
-                    }}
+                    onToggle={() => handleToggle(product.id)}
                   />
                 </td>
                 <td className="px-4 py-3 text-right">
                   <div className="flex items-center justify-end gap-2">
                     <Link
-                      href={`/admin/products/${product.id}`}
+                      href={`/dashboard/products/${product.id}`}
                       aria-label="Edit product"
                       className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-soft hover:bg-sand hover:text-ink"
                     >
                       <Pencil size={16} />
                     </Link>
-                    <DeleteProductButton productId={product.id} onDeleted={refresh} />
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(product.id)}
+                      aria-label="Delete product"
+                      className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-soft hover:bg-orange-light hover:text-orange-dark"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                    </button>
                   </div>
                 </td>
               </tr>

@@ -3,7 +3,7 @@ import { PageWrapper } from "@/components/layout/page-wrapper";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CategoryFilter } from "@/components/shop/category-filter";
 import { ProductGrid } from "@/components/shop/product-grid";
-import { PRODUCTS_SEED } from "@/data/products.seed";
+import { getProducts, getProductsByCategory } from "@/lib/supabase/products";
 import { PRODUCT_CATEGORIES, type ProductCategory } from "@/lib/data/types";
 
 export const metadata: Metadata = {
@@ -15,15 +15,15 @@ function isValidCategory(value: string | undefined): value is ProductCategory {
   return PRODUCT_CATEGORIES.some((c) => c.value === value);
 }
 
-export default function ShopPage({
+export default async function ShopPage({
   searchParams,
 }: {
   searchParams: { category?: string };
 }) {
   const category = isValidCategory(searchParams.category) ? searchParams.category : undefined;
   const products = category
-    ? PRODUCTS_SEED.filter((p) => p.category === category)
-    : PRODUCTS_SEED;
+    ? await getProductsByCategory(category)
+    : await getProducts();
 
   return (
     <PageWrapper>
