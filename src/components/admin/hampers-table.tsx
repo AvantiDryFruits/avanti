@@ -44,10 +44,10 @@ export function HampersTable({ hampers }: { hampers: GiftHamper[] }) {
             <tr key={hamper.id} className="border-b border-border last:border-b-0">
               <td className="flex items-center gap-3 px-4 py-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-sand text-[9px] text-muted">
-                  {hamper.image_urls[0] ? (
+                  {(hamper.image_urls ?? [])[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={hamper.image_urls[0]}
+                      src={(hamper.image_urls ?? [])[0]}
                       alt={hamper.name}
                       className="h-full w-full object-cover"
                     />

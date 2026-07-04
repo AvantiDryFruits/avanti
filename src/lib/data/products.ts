@@ -6,7 +6,11 @@ import type { Product, ProductCategory } from "./types";
 const KEY = "products";
 
 function loadAll(): Product[] {
-  return readFromStorage<Product[]>(KEY, PRODUCTS_SEED);
+  const raw = readFromStorage<(Product & { image_url?: string })[]>(KEY, PRODUCTS_SEED);
+  return raw.map((p) => ({
+    ...p,
+    image_urls: p.image_urls ?? (p.image_url ? [p.image_url] : []),
+  }));
 }
 
 function saveAll(products: Product[]): void {

@@ -6,7 +6,11 @@ import type { GiftHamper } from "./types";
 const KEY = "hampers";
 
 function loadAll(): GiftHamper[] {
-  return readFromStorage<GiftHamper[]>(KEY, HAMPERS_SEED);
+  const raw = readFromStorage<(GiftHamper & { image_url?: string })[]>(KEY, HAMPERS_SEED);
+  return raw.map((h) => ({
+    ...h,
+    image_urls: h.image_urls ?? (h.image_url ? [h.image_url] : []),
+  }));
 }
 
 function saveAll(hampers: GiftHamper[]): void {

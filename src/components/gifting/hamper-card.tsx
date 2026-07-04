@@ -12,9 +12,9 @@ export function HamperCard({ hamper }: { hamper: GiftHamper }) {
   return (
     <Card className="flex flex-col p-4">
       <div className="flex h-36 items-center justify-center overflow-hidden rounded-lg bg-sand text-xs text-muted">
-        {hamper.image_urls[0] ? (
+        {(hamper.image_urls ?? [])[0] ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={hamper.image_urls[0]} alt={hamper.name} className="h-full w-full object-cover" />
+          <img src={(hamper.image_urls ?? [])[0]} alt={hamper.name} className="h-full w-full object-cover" />
         ) : (
           "No image"
         )}

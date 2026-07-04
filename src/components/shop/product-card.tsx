@@ -20,9 +20,9 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Card className="flex flex-col p-4">
       <div className="flex h-32 items-center justify-center overflow-hidden rounded-lg bg-sand text-xs text-muted">
-        {product.image_urls[0] ? (
+        {(product.image_urls ?? [])[0] ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={product.image_urls[0]} alt={product.name} className="h-full w-full object-cover" />
+          <img src={(product.image_urls ?? [])[0]} alt={product.name} className="h-full w-full object-cover" />
         ) : (
           "No image"
         )}
