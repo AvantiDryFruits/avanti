@@ -6,7 +6,7 @@ import type { Product, ProductCategory } from "@/lib/data/types";
 export async function getProducts(): Promise<Product[]> {
   const supabase = await createClient();
   const { data, error } = await supabase.from("products").select("*").order("name");
-  if (error) throw error;
+  if (error) return [];
   return data ?? [];
 }
 
@@ -31,7 +31,7 @@ export async function getProductsByCategory(category: ProductCategory): Promise<
     .select("*")
     .eq("category", category)
     .order("name");
-  if (error) throw error;
+  if (error) return [];
   return data ?? [];
 }
 
@@ -42,7 +42,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     .select("*")
     .eq("is_featured", true)
     .order("name");
-  if (error) throw error;
+  if (error) return [];
   return data ?? [];
 }
 

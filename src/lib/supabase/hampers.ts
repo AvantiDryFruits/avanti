@@ -6,7 +6,7 @@ import type { GiftHamper } from "@/lib/data/types";
 export async function getHampers(): Promise<GiftHamper[]> {
   const supabase = await createClient();
   const { data, error } = await supabase.from("gift_hampers").select("*").order("name");
-  if (error) throw error;
+  if (error) return [];
   return data ?? [];
 }
 
@@ -35,7 +35,7 @@ export async function getFeaturedHampers(): Promise<GiftHamper[]> {
     .select("*")
     .eq("is_featured", true)
     .order("name");
-  if (error) throw error;
+  if (error) return [];
   return data ?? [];
 }
 
