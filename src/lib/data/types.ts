@@ -1,17 +1,13 @@
 export type ProductCategory =
   | "dry-fruits"
-  | "premium"
   | "sweets"
   | "farsan"
-  | "namkeen"
   | "masala";
 
 export const PRODUCT_CATEGORIES: { value: ProductCategory; label: string }[] = [
-  { value: "dry-fruits", label: "Dry Fruits" },
-  { value: "premium", label: "Premium" },
+  { value: "dry-fruits", label: "Dry Fruits & Premium" },
   { value: "sweets", label: "Sweets" },
-  { value: "farsan", label: "Farsan" },
-  { value: "namkeen", label: "Namkeen" },
+  { value: "farsan", label: "Farsan & Namkeen" },
   { value: "masala", label: "Masala" },
 ];
 

@@ -15,7 +15,7 @@ import { PRODUCT_CATEGORIES } from "@/lib/data/types";
 import { slugify } from "@/lib/utils";
 import type { Product } from "@/lib/data/types";
 
-const CATEGORY_VALUES = ["dry-fruits", "premium", "sweets", "farsan", "namkeen", "masala"] as const;
+const CATEGORY_VALUES = ["dry-fruits", "sweets", "farsan", "masala"] as const;
 
 const productSchema = z.object({
   name: z.string().min(1, "Name is required"),

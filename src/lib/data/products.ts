@@ -10,6 +10,9 @@ function loadAll(): Product[] {
   return raw.map((p) => ({
     ...p,
     image_urls: p.image_urls ?? (p.image_url ? [p.image_url] : []),
+    category: (p.category === ("premium" as string) ? "dry-fruits"
+      : p.category === ("namkeen" as string) ? "farsan"
+      : p.category) as Product["category"],
   }));
 }
 

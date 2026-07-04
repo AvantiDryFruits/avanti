@@ -25,16 +25,16 @@ const ROWS: SeedRow[] = [
   { name: "Pine Nuts", category: "dry-fruits", pricePerGram: 2.0, description: "Chilgoza pine nuts, buttery and rare." },
   { name: "Mulberries", category: "dry-fruits", pricePerGram: 1.3, description: "Dried mulberries, naturally sweet and chewy." },
 
-  // Premium (9)
-  { name: "Iranian Pistachios", category: "premium", pricePerGram: 3.5, description: "Premium Iranian pistachios, roasted and salted.", featured: true },
-  { name: "Mamra Almonds", category: "premium", pricePerGram: 5.5, description: "Rare Mamra almonds, prized for taste and nutrition." },
-  { name: "Kashmiri Saffron", category: "premium", pricePerGram: 6.0, description: "Pure Kashmiri Mongra saffron threads." },
-  { name: "Royal Mixed Nuts", category: "premium", pricePerGram: 3.2, description: "Curated mix of premium nuts for gifting." },
-  { name: "Persian Walnuts", category: "premium", pricePerGram: 4.0, description: "Light-shelled Persian walnut halves." },
-  { name: "Honey Roasted Almonds", category: "premium", pricePerGram: 2.8, description: "Almonds roasted in a delicate honey glaze." },
-  { name: "Chocolate Coated Almonds", category: "premium", pricePerGram: 3.0, description: "Roasted almonds coated in rich chocolate." },
-  { name: "Jumbo Cashews Premium", category: "premium", pricePerGram: 2.6, description: "Extra-large grade jumbo cashews." },
-  { name: "Premium Dried Berries Mix", category: "premium", pricePerGram: 4.5, description: "Mixed dried berries: cranberry, blueberry, golden berry." },
+  // Dry Fruits & Premium (9)
+  { name: "Iranian Pistachios", category: "dry-fruits", pricePerGram: 3.5, description: "Premium Iranian pistachios, roasted and salted.", featured: true },
+  { name: "Mamra Almonds", category: "dry-fruits", pricePerGram: 5.5, description: "Rare Mamra almonds, prized for taste and nutrition." },
+  { name: "Kashmiri Saffron", category: "dry-fruits", pricePerGram: 6.0, description: "Pure Kashmiri Mongra saffron threads." },
+  { name: "Royal Mixed Nuts", category: "dry-fruits", pricePerGram: 3.2, description: "Curated mix of premium nuts for gifting." },
+  { name: "Persian Walnuts", category: "dry-fruits", pricePerGram: 4.0, description: "Light-shelled Persian walnut halves." },
+  { name: "Honey Roasted Almonds", category: "dry-fruits", pricePerGram: 2.8, description: "Almonds roasted in a delicate honey glaze." },
+  { name: "Chocolate Coated Almonds", category: "dry-fruits", pricePerGram: 3.0, description: "Roasted almonds coated in rich chocolate." },
+  { name: "Jumbo Cashews Premium", category: "dry-fruits", pricePerGram: 2.6, description: "Extra-large grade jumbo cashews." },
+  { name: "Premium Dried Berries Mix", category: "dry-fruits", pricePerGram: 4.5, description: "Mixed dried berries: cranberry, blueberry, golden berry." },
 
   // Sweets (8)
   { name: "Kaju Katli", category: "sweets", pricePerGram: 0.95, description: "Classic cashew fudge with a silver-leaf finish.", featured: true },
@@ -56,15 +56,15 @@ const ROWS: SeedRow[] = [
   { name: "Bhakarwadi", category: "farsan", pricePerGram: 0.5, description: "Sweet-spicy rolled bhakarwadi.", featured: true },
   { name: "Papdi", category: "farsan", pricePerGram: 0.3, description: "Crisp, lightly salted papdi." },
 
-  // Namkeen (8)
-  { name: "Bombay Mixture", category: "namkeen", pricePerGram: 0.25, description: "Classic spiced Bombay mixture." },
-  { name: "Bikaneri Mixture", category: "namkeen", pricePerGram: 0.28, description: "Rajasthani-style spiced mixture." },
-  { name: "Aloo Bhujia", category: "namkeen", pricePerGram: 0.3, description: "Crispy spiced potato bhujia." },
-  { name: "Spicy Peanuts", category: "namkeen", pricePerGram: 0.22, description: "Roasted peanuts in an extra spicy masala coat." },
-  { name: "Ratlami Sev", category: "namkeen", pricePerGram: 0.35, description: "Bold, spicy Ratlami-style sev.", featured: true },
-  { name: "Navratan Mixture", category: "namkeen", pricePerGram: 0.4, description: "Nine-ingredient festive mixture." },
-  { name: "Corn Flakes Chivda", category: "namkeen", pricePerGram: 0.24, description: "Light, crunchy corn flakes chivda." },
-  { name: "Masala Peanuts", category: "namkeen", pricePerGram: 0.26, description: "Crunchy peanuts in a spiced gram-flour coat." },
+  // Farsan & Namkeen (8)
+  { name: "Bombay Mixture", category: "farsan", pricePerGram: 0.25, description: "Classic spiced Bombay mixture." },
+  { name: "Bikaneri Mixture", category: "farsan", pricePerGram: 0.28, description: "Rajasthani-style spiced mixture." },
+  { name: "Aloo Bhujia", category: "farsan", pricePerGram: 0.3, description: "Crispy spiced potato bhujia." },
+  { name: "Spicy Peanuts", category: "farsan", pricePerGram: 0.22, description: "Roasted peanuts in an extra spicy masala coat." },
+  { name: "Ratlami Sev", category: "farsan", pricePerGram: 0.35, description: "Bold, spicy Ratlami-style sev.", featured: true },
+  { name: "Navratan Mixture", category: "farsan", pricePerGram: 0.4, description: "Nine-ingredient festive mixture." },
+  { name: "Corn Flakes Chivda", category: "farsan", pricePerGram: 0.24, description: "Light, crunchy corn flakes chivda." },
+  { name: "Masala Peanuts", category: "farsan", pricePerGram: 0.26, description: "Crunchy peanuts in a spiced gram-flour coat." },
 
   // Masala (7)
   { name: "Garam Masala", category: "masala", pricePerGram: 1.2, description: "House-blend garam masala, freshly ground.", featured: true },
