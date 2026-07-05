@@ -89,8 +89,8 @@ export function ProductForm({ product }: { product?: Product }) {
       }
       router.push("/dashboard/products");
       router.refresh();
-    } catch {
-      setSubmitError("Something went wrong. Please try again.");
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   }
 

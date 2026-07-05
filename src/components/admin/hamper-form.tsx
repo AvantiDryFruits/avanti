@@ -86,8 +86,8 @@ export function HamperForm({ hamper }: { hamper?: GiftHamper }) {
       }
       router.push("/dashboard/hampers");
       router.refresh();
-    } catch {
-      setSubmitError("Something went wrong. Please try again.");
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   }
 
