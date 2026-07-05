@@ -67,6 +67,10 @@ export function updateProduct(
   return updated;
 }
 
+export function getFeaturedProducts(): Product[] {
+  return loadAll().filter((p) => p.is_featured);
+}
+
 export function deleteProduct(id: string): void {
   saveAll(loadAll().filter((p) => p.id !== id));
 }

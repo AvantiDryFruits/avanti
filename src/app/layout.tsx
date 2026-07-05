@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const display = Playfair_Display({
@@ -45,6 +46,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${display.variable} ${body.variable} font-sans antialiased`}>
         {children}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="f51a5b8a-ee51-4d5c-9589-4f6f0ffb8345"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
