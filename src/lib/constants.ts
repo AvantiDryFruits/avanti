@@ -1,8 +1,8 @@
 export const SITE_NAME = "Avanti Dry Fruits";
 export const TAGLINE = "The Trust of Purity & Taste";
 
-export const WHATSAPP_NUMBER = "919757411822";
-export const CONTACT_PHONE_DISPLAY = "+91 97574 11822";
+export const WHATSAPP_NUMBER = "919004659665";
+export const CONTACT_PHONE_DISPLAY = "+91 90046 59665";
 export const CONTACT_EMAIL = "avantidryfruits5@gmail.com";
 export const INSTAGRAM_URL = "https://instagram.com/avantidryfruits";
 export const SHOP_ADDRESS =

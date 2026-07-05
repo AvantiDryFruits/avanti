@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
   {
     question: "Can I choose how much I want of an item?",
     answer:
-      "Yes — most products can be ordered in 100g, 250g, 500g or 1kg. Pick a weight on the product card before adding it to your cart.",
+      "Yes — most products can be ordered in 100g, 250g, 500g or 1kg. Pick a weight on the product card before adding it to your cart. If you need a different quantity, just mention it on WhatsApp when you order and we'll adjust it for you.",
   },
   {
     question: "Do you deliver, or is it pickup only?",
