@@ -43,7 +43,18 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     .eq("is_featured", true)
     .order("name");
   if (error) return [];
-  return data ?? [];
+  if (data && data.length > 0) return data;
+
+  // No products marked featured yet — fall back to available products so the
+  // homepage never renders an empty section.
+  const { data: fallback, error: fallbackError } = await supabase
+    .from("products")
+    .select("*")
+    .eq("is_available", true)
+    .order("name")
+    .limit(8);
+  if (fallbackError) return [];
+  return fallback ?? [];
 }
 
 export async function createProduct(

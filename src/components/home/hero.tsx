@@ -6,7 +6,10 @@ export function Hero() {
   return (
     <section className="bg-green-dark">
       <div className="mx-auto max-w-6xl px-4 py-16 text-center md:px-6 md:py-24">
-        <p className="text-sm font-semibold uppercase tracking-wide text-on-dark/70">
+        <p className="text-sm italic text-on-dark/70">
+          वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+        </p>
+        <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-on-dark/70">
           Mulund West, Mumbai
         </p>
         <h1 className="mt-3 font-display text-4xl text-on-dark md:text-5xl">{SITE_NAME}</h1>
