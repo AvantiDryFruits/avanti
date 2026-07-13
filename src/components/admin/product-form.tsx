@@ -13,9 +13,13 @@ import { ImagesField } from "./images-field";
 import { createProduct, updateProduct } from "@/lib/actions/products";
 import { PRODUCT_CATEGORIES } from "@/lib/data/types";
 import { slugify } from "@/lib/utils";
-import type { Product } from "@/lib/data/types";
+import type { Product, ProductCategory } from "@/lib/data/types";
 
-const CATEGORY_VALUES = ["dry-fruits", "sweets", "farsan", "masala"] as const;
+// Derive from the single source of truth so this never drifts out of sync.
+const CATEGORY_VALUES = PRODUCT_CATEGORIES.map((c) => c.value) as [
+  ProductCategory,
+  ...ProductCategory[],
+];
 
 const productSchema = z.object({
   name: z.string().min(1, "Name is required"),

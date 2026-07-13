@@ -7,7 +7,7 @@ CREATE TABLE products (
   name TEXT NOT NULL,
   slug TEXT UNIQUE NOT NULL,
   description TEXT,
-  category TEXT NOT NULL CHECK (category IN ('dry-fruits','premium','sweets','farsan','namkeen','masala')),
+  category TEXT NOT NULL CHECK (category IN ('dry-fruits','premium','sweets','farsan','namkeen','masala','hot-fresh','frozen')),
   price_per_gram NUMERIC NOT NULL,
   image_url TEXT,
   is_available BOOLEAN NOT NULL DEFAULT true,

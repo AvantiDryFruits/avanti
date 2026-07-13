@@ -2,13 +2,17 @@ export type ProductCategory =
   | "dry-fruits"
   | "sweets"
   | "farsan"
-  | "masala";
+  | "masala"
+  | "hot-fresh"
+  | "frozen";
 
 export const PRODUCT_CATEGORIES: { value: ProductCategory; label: string }[] = [
   { value: "dry-fruits", label: "Premium Dry Fruits" },
   { value: "sweets", label: "Sweets" },
   { value: "farsan", label: "Farsan & Namkeen" },
   { value: "masala", label: "Masala" },
+  { value: "hot-fresh", label: "Hot & Fresh" },
+  { value: "frozen", label: "Frozen" },
 ];
 
 export interface Product {
