@@ -18,9 +18,10 @@ function isValidCategory(value: string | undefined): value is ProductCategory {
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: { category?: string };
+  searchParams: Promise<{ category?: string }>;
 }) {
-  const category = isValidCategory(searchParams.category) ? searchParams.category : undefined;
+  const params = await searchParams;
+  const category = isValidCategory(params.category) ? params.category : undefined;
   const products = category
     ? await getProductsByCategory(category)
     : await getProducts();
