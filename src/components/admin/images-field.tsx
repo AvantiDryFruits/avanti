@@ -35,6 +35,8 @@ export function ImagesField({
       } else {
         onChange([...values, result.url]);
       }
+    } catch {
+      setError("Upload failed. The image may be too large — try one under 8MB.");
     } finally {
       setUploading(false);
     }
