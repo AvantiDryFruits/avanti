@@ -51,6 +51,10 @@ export function CartDrawer() {
               <span>Subtotal</span>
               <span>{formatPrice(subtotal)}</span>
             </div>
+            <p className="mb-3 rounded-card border border-yellow-400 bg-yellow-100 px-3 py-2 text-xs text-yellow-900">
+              Delivery only within Mulund (orders above Rs. 1000). Outside Mulund, delivery-app
+              charges apply.
+            </p>
             <OrderViaWhatsappButton className="w-full" />
             <Link
               href="/cart"

@@ -39,7 +39,7 @@ export default function CartPage() {
             <p className="mt-1 text-sm text-ink-soft">
               Final pricing confirmed over WhatsApp before dispatch.
             </p>
-            <p className="mt-3 rounded-card border border-border bg-sand px-4 py-3 text-sm text-ink-soft">
+            <p className="mt-3 rounded-card border border-yellow-400 bg-yellow-100 px-4 py-3 text-sm text-yellow-900">
               Our delivery executives are available only for Mulund orders above Rs. 1000. For
               orders outside Mulund, the usage of delivery apps will be involved, and the total
               amount will be updated accordingly.

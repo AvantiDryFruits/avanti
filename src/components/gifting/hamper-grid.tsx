@@ -3,7 +3,7 @@ import { HamperCard } from "./hamper-card";
 
 export function HamperGrid({ hampers }: { hampers: GiftHamper[] }) {
   if (hampers.length === 0) {
-    return <p className="py-12 text-center text-ink-soft">No hampers available right now.</p>;
+    return null;
   }
 
   return (
